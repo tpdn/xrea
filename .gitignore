@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.so
+build/
+dist/
+lib/
+*.egg-info/
+*.egg
+venv
+Pipfile.lock
+.idea
+README.html
