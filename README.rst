@@ -2,9 +2,14 @@
 ======================
 XREA API wrapper
 ======================
-.. image:: https://img.shields.io/pypi/v/xrea.svg?style=for-the-badge
-.. image:: https://img.shields.io/pypi/l/xrea.svg?style=for-the-badge
-.. image:: https://img.shields.io/pypi/pyversions/xrea.svg?style=for-the-badge
+.. image:: https://img.shields.io/pypi/v/xrea.svg
+    :target: https://pypi.python.org/pypi/xrea
+
+.. image:: https://img.shields.io/pypi/l/xrea.svg
+    :target: https://pypi.python.org/pypi/xrea
+
+.. image:: https://img.shields.io/pypi/pyversions/xrea.svg
+    :target: https://pypi.python.org/pypi/xrea
 
 This package is simple implementation of XREA API(https://apidoc.xrea.com) wrapper with Python 3.
 
