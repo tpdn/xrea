@@ -61,8 +61,9 @@ class ApiBase:
 
     def call_api(self, api, **kwargs):
         api_url = '/'.join([self.base_url, self.api_version, api])
-        kwargs.update(self.api_user_params)
-        return ApiResponse(api_url, **kwargs)
+        comverted_params = self.convert_into_flat_dict(kwargs)
+        comverted_params.update(self.api_user_params)
+        return ApiResponse(api_url, **comverted_params)
 
     def __getattr__(self, k):
         return ApiCall(api_parts=[k], func=self.call_api)
@@ -74,3 +75,25 @@ class ApiBase:
             'server_name': self.server_name,
             'api_secret_key': self.api_secret_key,
         }
+
+    def convert_into_flat_dict(self, nested_dict, prepend='', result=None):
+        if result is None:
+            result = {}
+        if isinstance(nested_dict, dict):
+            for key, value in nested_dict.items():
+                if key is None:
+                    name = prepend
+                elif not prepend:
+                    name = key
+                else:
+                    name = '{prepend}{l_bracket}{key}{r_bracket}'.format(
+                        prepend=prepend, key=key, l_bracket='[', r_bracket=']')
+                self.convert_into_flat_dict(value, name, result)
+        elif isinstance(nested_dict, list):
+            for i, value in enumerate(nested_dict):
+                name = '{prepend}{l_bracket}{key}{r_bracket}'.format(
+                    prepend=prepend, key=i, l_bracket='[', r_bracket=']')
+                self.convert_into_flat_dict(value, name, result)
+        else:
+            result[prepend] = nested_dict
+        return result
